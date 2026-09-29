@@ -24,18 +24,16 @@ class Provider:
                     json=payload,
                     headers=headers,
                 )
-        
+
         except httpx.HTTPError as exc:
-            raise ProviderError(
-                f"{self.name}: {type(exc).__name__}: {exc}"
-            ) from exc
+            raise ProviderError(f"{self.name}: {type(exc).__name__}: {exc}") from exc
 
         if response.status_code != 200:
             raise ProviderError(
                 f"{self.name}: HTTP {response.status_code}: {response.text[:200]}"
             )
         return response.json()
-    
+
 
 def build_providers(settings) -> list[Provider]:
     """All configured providers, in fallback order."""

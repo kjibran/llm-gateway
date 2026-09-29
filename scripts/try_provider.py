@@ -9,7 +9,9 @@ async def main():
     for provider in build_providers(settings):
         try:
             result = await provider.chat(messages, timeout=settings.request_timeout)
-            print(f"OK     {provider.name}: {result['choices'][0]['message']['content']}")
+            print(
+                f"OK     {provider.name}: {result['choices'][0]['message']['content']}"
+            )
         except ProviderError as exc:
             print(f"FAILED {exc}")
 
