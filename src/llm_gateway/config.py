@@ -14,5 +14,7 @@ class Settings(BaseSettings):
 
     request_timeout: float = 30.0
 
+    gateway_api_key: str = ""
+
 
 settings = Settings()

@@ -1,7 +1,7 @@
 import logging
 from dataclasses import asdict
 
-from fastapi import FastAPI, HTTPException, Response
+from fastapi import Depends, FastAPI, Header, HTTPException, Response
 from pydantic import BaseModel
 
 from llm_gateway.config import settings
@@ -24,12 +24,19 @@ class ChatRequest(BaseModel):
     model: str | None = None  # accepted for OpenAI compatibility, the router decides
 
 
+def require_api_key(authorization: str | None = Header(default=None)):
+    """Protect the gateway when GATEWAY_API_KEY is set. Open when unset, for local dev."""
+    expected = settings.gateway_api_key
+    if expected and authorization != f"Bearer {expected}":
+        raise HTTPException(status_code=401, detail="invalid or missing API key")
+
+
 @app.get("/health")
 def health():
     return {"status": "ok", "providers": [p.name for p in gateway.providers]}
 
 
-@app.post("/v1/chat/completions")
+@app.post("/v1/chat/completions", dependencies=[Depends(require_api_key)])
 async def chat_completions(request: ChatRequest, response: Response):
     messages = [m.model_dump() for m in request.messages]
     try:
