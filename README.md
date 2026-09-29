@@ -1,1 +1,1 @@
-![CI](https://github.com/kjibran/llm-gateway/actions/workflows/ci.yml/badge.svg)
+[![CI](https://github.com/kjibran/llm-gateway/actions/workflows/ci.yaml/badge.svg)](https://github.com/kjibran/llm-gateway/actions/workflows/ci.yaml)
