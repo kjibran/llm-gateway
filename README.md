@@ -1,0 +1,1 @@
+![CI](https://github.com/kjibran/llm-gateway/actions/workflows/ci.yml/badge.svg)
