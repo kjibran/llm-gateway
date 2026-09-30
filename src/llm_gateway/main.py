@@ -1,6 +1,7 @@
 import logging
 from dataclasses import asdict
 
+from fastapi.responses import RedirectResponse
 from fastapi import Depends, FastAPI, Header, HTTPException, Response
 from pydantic import BaseModel
 
@@ -29,6 +30,11 @@ def require_api_key(authorization: str | None = Header(default=None)):
     expected = settings.gateway_api_key
     if expected and authorization != f"Bearer {expected}":
         raise HTTPException(status_code=401, detail="invalid or missing API key")
+
+
+@app.get("/", include_in_schema=False)
+def root():
+    return RedirectResponse(url="/docs")
 
 
 @app.get("/health")
