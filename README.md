@@ -4,6 +4,8 @@
 
 An OpenAI-compatible API gateway that routes chat requests across free LLM providers (Groq, Google Gemini, OpenRouter) and falls back automatically when a provider is rate-limited, overloaded, or unavailable.
 
+**Try it in your browser:** https://huggingface.co/spaces/khajlk/llm-gateway-demo
+
 **Live API docs:** https://llm-gateway-2k0v.onrender.com
 
 The service runs on a free tier, so the first request after idle time can take up to a minute while it wakes up.
