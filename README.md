@@ -14,6 +14,16 @@ Free LLM tiers are useful for prototyping but unreliable. During development I s
 
 The gateway puts one stable endpoint in front of several providers. Clients send a standard OpenAI-style request, and the gateway tries providers in order until one answers.
 
+## What this project demonstrates
+
+- **LLM API integration:** working with multiple LLM providers through OpenAI-compatible APIs, including model selection and handling provider-specific differences.
+- **Resilient system design:** automatic fallback, timeout handling, and structured error reporting when upstream services fail.
+- **API development:** an async REST API in FastAPI with request validation and bearer-token authentication.
+- **Testing:** unit tests with fake providers to verify fallback behaviour without calling real services.
+- **CI/CD:** GitHub Actions pipeline with linting, formatting checks, and tests, deploying to production only when all checks pass.
+- **Containerisation and deployment:** Docker image deployed to Render, configured through environment variables.
+- **Secrets management:** API keys kept out of the code and repository, supplied as environment variables locally, in CI, and in production.
+
 ## Architecture
 
 ```mermaid
